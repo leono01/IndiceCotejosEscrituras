@@ -26,14 +26,14 @@ class EscrituraController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'escritura.label', default: 'Escritura'), escrituraInstance.id])
-        redirect(action: "show", id: escrituraInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'escritura.label', default: 'Escritura'), escrituraInstance.numeroDeEscritura])
+        redirect(action: "edit", id: escrituraInstance.id)
     }
 
     def show(Long id) {
         def escrituraInstance = Escritura.get(id)
         if (!escrituraInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "list")
             return
         }
@@ -44,7 +44,7 @@ class EscrituraController {
     def edit(Long id) {
         def escrituraInstance = Escritura.get(id)
         if (!escrituraInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "list")
             return
         }
@@ -55,7 +55,7 @@ class EscrituraController {
     def update(Long id, Long version) {
         def escrituraInstance = Escritura.get(id)
         if (!escrituraInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "list")
             return
         }
@@ -77,28 +77,34 @@ class EscrituraController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'escritura.label', default: 'Escritura'), escrituraInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'escritura.label', default: 'Escritura'), escrituraInstance.numeroDeEscritura])
         redirect(action: "show", id: escrituraInstance.id)
     }
 
     def delete(Long id) {
         def escrituraInstance = Escritura.get(id)
         if (!escrituraInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "list")
             return
         }
 
         try {
             escrituraInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'escritura.label', default: 'Escritura'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'escritura.label', default: 'Escritura'), numeroDeEscritura])
             redirect(action: "show", id: id)
         }
     }
     
+    def guardarEscrituras={                
+        chain(controller:'jasper', action:'index', model: [data:null], params:params)
+    }
     
+    def guardarCotejos={
+        chain(controller:'jasper', action:'index', model: [data:null], params:params)
+    }
 }

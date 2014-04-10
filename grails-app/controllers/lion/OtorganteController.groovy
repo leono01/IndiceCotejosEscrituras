@@ -19,15 +19,15 @@ class OtorganteController {
         [otorganteInstance: new Otorgante(params)]
     }
 
-    def save() {
+    def save() {        
         def otorganteInstance = new Otorgante(params)
         if (!otorganteInstance.save(flush: true)) {
             render(view: "create", model: [otorganteInstance: otorganteInstance])
             return
         }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), otorganteInstance.id])
-        redirect(action: "show", id: otorganteInstance.id)
+        long escrituraId = params.escritura.id as long 
+        flash.message = message(code: 'default.created.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), otorganteInstance.nombreOtorgante])
+        redirect(controller:"escritura", action: "edit", id:escrituraId)
     }
 
     def show(Long id) {
@@ -48,7 +48,7 @@ class OtorganteController {
             redirect(action: "list")
             return
         }
-
+        
         [otorganteInstance: otorganteInstance]
     }
 
@@ -76,9 +76,11 @@ class OtorganteController {
             render(view: "edit", model: [otorganteInstance: otorganteInstance])
             return
         }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), otorganteInstance.id])
-        redirect(action: "show", id: otorganteInstance.id)
+        long escrituraId = params.escritura.id as long
+        
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), otorganteInstance.nombreOtorgante])
+        //redirect(action: "show", id: otorganteInstance.id)
+        redirect(controller:"escritura", action: "edit", id:escrituraId)
     }
 
     def delete(Long id) {
@@ -92,7 +94,9 @@ class OtorganteController {
         try {
             otorganteInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), id])
-            redirect(action: "list")
+            //redirect(action: "list")
+            long escrituraId = params.escritura.id as long
+            redirect(controller:"escritura", action: "edit", id:escrituraId)
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'otorgante.label', default: 'Otorgante'), id])

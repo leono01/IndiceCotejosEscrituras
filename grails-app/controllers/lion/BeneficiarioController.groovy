@@ -25,9 +25,10 @@ class BeneficiarioController {
             render(view: "create", model: [beneficiarioInstance: beneficiarioInstance])
             return
         }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), beneficiarioInstance.id])
-        redirect(action: "show", id: beneficiarioInstance.id)
+        long escrituraId = params.escritura.id as long 
+        flash.message = message(code: 'default.created.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), beneficiarioInstance.nombreBeneficiario])
+        //redirect(action: "show", id: beneficiarioInstance.id)
+        redirect(controller:"escritura", action: "edit", id:escrituraId)
     }
 
     def show(Long id) {
@@ -76,9 +77,10 @@ class BeneficiarioController {
             render(view: "edit", model: [beneficiarioInstance: beneficiarioInstance])
             return
         }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), beneficiarioInstance.id])
-        redirect(action: "show", id: beneficiarioInstance.id)
+        long escrituraId = params.escritura.id as long
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), beneficiarioInstance.nombreBeneficiario])
+        //redirect(action: "show", id: beneficiarioInstance.id)
+        redirect(controller:"escritura", action: "edit", id:escrituraId)
     }
 
     def delete(Long id) {
@@ -92,7 +94,9 @@ class BeneficiarioController {
         try {
             beneficiarioInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), id])
-            redirect(action: "list")
+            //redirect(action: "list")
+            long escrituraId = params.escritura.id as long
+            redirect(controller:"escritura", action: "edit", id:escrituraId)
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'beneficiario.label', default: 'Beneficiario'), id])

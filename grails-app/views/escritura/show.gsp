@@ -12,8 +12,8 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="list">Mostrar escrituras y cotejos capturados</g:link></li>
+				<li><g:link class="create" action="create" params="['escritura.id': escrituraInstance?.id]">Capturar escritura o cotejo</g:link></li>
 			</ul>
 		</div>
 		<div id="show-escritura" class="content scaffold-show" role="main">
@@ -63,23 +63,40 @@
 				<li class="fieldcontain">
 					<span id="fecha-label" class="property-label"><g:message code="escritura.fecha.label" default="Fecha" /></span>
 					
-						<span class="property-value" aria-labelledby="fecha-label"><g:formatDate date="${escrituraInstance?.fecha}" /></span>
+						<span class="property-value" aria-labelledby="fecha-label"><g:formatDate date="${escrituraInstance?.fecha}" format="dd/MM/yy" /></span>
 					
 				</li>
 				</g:if>
-			
+                                
+                                <g:if test="${escrituraInstance?.otorgantes}">
+				<li class="fieldcontain">
+					<span id="otorgantes-label" class="property-label"><g:message code="escritura.otorgantes.label" default="Otorgantes" /></span>
+					
+						<g:each in="${escrituraInstance.otorgantes}" var="o">
+						<span class="property-value" aria-labelledby="otorgantes-label">
+                                                    <%--<g:link controller="otorgante" action="show" id="${o.id}">${o?.nombreOtorgante.encodeAsHTML()}</g:link>--%>
+                                                    ${o?.nombreOtorgante.encodeAsHTML()}
+                                                </span>
+						</g:each>
+					
+				</li>
+				</g:if>
+                                
 				<g:if test="${escrituraInstance?.beneficiarios}">
 				<li class="fieldcontain">
 					<span id="beneficiarios-label" class="property-label"><g:message code="escritura.beneficiarios.label" default="Beneficiarios" /></span>
 					
 						<g:each in="${escrituraInstance.beneficiarios}" var="b">
-						<span class="property-value" aria-labelledby="beneficiarios-label"><g:link controller="beneficiario" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="beneficiarios-label">
+                                                    <%--<g:link controller="beneficiario" action="show" id="${b.id}">${b?.nombreBeneficiario.encodeAsHTML()}</g:link>--%>
+                                                    ${b?.nombreBeneficiario.encodeAsHTML()}
+                                                </span>
 						</g:each>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${escrituraInstance?.operacionesDelBeneficiario}">
+				<%--<g:if test="${escrituraInstance?.operacionesDelBeneficiario}">
 				<li class="fieldcontain">
 					<span id="operacionesDelBeneficiario-label" class="property-label"><g:message code="escritura.operacionesDelBeneficiario.label" default="Operaciones Del Beneficiario" /></span>
 					
@@ -99,25 +116,14 @@
 						</g:each>
 					
 				</li>
-				</g:if>
-			
-				<g:if test="${escrituraInstance?.otorgantes}">
-				<li class="fieldcontain">
-					<span id="otorgantes-label" class="property-label"><g:message code="escritura.otorgantes.label" default="Otorgantes" /></span>
-					
-						<g:each in="${escrituraInstance.otorgantes}" var="o">
-						<span class="property-value" aria-labelledby="otorgantes-label"><g:link controller="otorgante" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				</g:if>--%>					
 			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${escrituraInstance?.id}" />
 					<g:link class="edit" action="edit" id="${escrituraInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:actionSubmit class="delete" action="delete" value="Eliminar Escritura" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
 		</div>

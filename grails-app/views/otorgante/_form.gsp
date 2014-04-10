@@ -18,7 +18,7 @@
 	<g:select id="escritura" name="escritura.id" from="${lion.Escritura.list()}" optionKey="id" required="" value="${otorganteInstance?.escritura?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: otorganteInstance, field: 'operacionesDelOtorgante', 'error')} ">
+<%--<div class="fieldcontain ${hasErrors(bean: otorganteInstance, field: 'operacionesDelOtorgante', 'error')} ">
 	<label for="operacionesDelOtorgante">
 		<g:message code="otorgante.operacionesDelOtorgante.label" default="Operaciones Del Otorgante" />
 		
@@ -33,5 +33,5 @@
 </li>
 </ul>
 
-</div>
+</div>--%>
 

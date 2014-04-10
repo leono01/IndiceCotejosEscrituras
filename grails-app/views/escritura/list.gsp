@@ -5,18 +5,33 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'escritura.label', default: 'Escritura')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title>Escrituras y cotejos capturados</title>
 	</head>
 	<body>
 		<a href="#list-escritura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create">Capturar Escritura o Cotejo</g:link></li>
 			</ul>
 		</div>
+                <div class="well">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <g:jasperReport name="reporteEscrituras" jasper="reporteEscrituras" format="PDF" description="Hacer Reporte Índice Escrituras (PDF)" action="guardarEscrituras" controller="escritura">
+                            </g:jasperReport>    
+                          </td>
+                          <td>
+                            <g:jasperReport name="reporteCotejos" jasper="reporteCotejos" format="PDF" description="Hacer Reporte Índice Cotejos (PDF)" action="guardarCotejos" controller="escritura"/>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
 		<div id="list-escritura" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Escrituras y cotejos capturados.</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,13 +39,13 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="numeroDeEscritura" title="${message(code: 'escritura.numeroDeEscritura.label', default: 'Numero De Escritura')}" />
+						<g:sortableColumn property="numeroDeEscritura" title="${message(code: 'escritura.numeroDeEscritura.label', default: 'Escritura')}" />
                                                 
-                                                <th>OTORGANTES</th>
+                                                <th>OTORGANTES / SOLICITANTES</th>
 					                                                
-                                                <th>BENEFICIARIOS</th>
+                                                <th> </th>
                                                 
-						<g:sortableColumn property="nombreOperacion" title="${message(code: 'escritura.nombreOperacion.label', default: 'Nombre Operacion')}" />
+						<g:sortableColumn property="nombreOperacion" title="${message(code: 'escritura.nombreOperacion.label', default: 'Operación')}" />
 					
 						<g:sortableColumn property="volumen" title="${message(code: 'escritura.volumen.label', default: 'Volumen')}" />
 					
@@ -82,7 +97,7 @@
 					
 						<td>${fieldValue(bean: escrituraInstance, field: "folios")}</td>
 					
-						<td><g:formatDate date="${escrituraInstance.fecha}" /></td>
+						<td><g:formatDate date="${escrituraInstance.fecha}" format="dd/MM/yy"/></td>
 					
 					</tr>
 				</g:each>

@@ -4,14 +4,14 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'escritura.label', default: 'Escritura')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<title>Capturar datos de escritura o cotejo</title>
 	</head>
 	<body>
 		<a href="#create-escritura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="list">Mostrar escrituras y cotejos capturados</g:link></li>
 			</ul>
 		</div>
 		<div id="create-escritura" class="content scaffold-create" role="main">
@@ -27,11 +27,11 @@
 			</ul>
 			</g:hasErrors>
 			<g:form action="save" >
-				<fieldset class="form">
-					<g:render template="form"/>
+				<fieldset class="form">                                
+					<g:render template="form2"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="create" class="save" value="Siguiente" />
 				</fieldset>
 			</g:form>
 		</div>

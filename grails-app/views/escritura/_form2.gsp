@@ -42,7 +42,7 @@
 	<g:datePicker name="fecha" precision="day" format="dd/MM/yy" value="${escrituraInstance?.fecha}" default="none" noSelection="['': '']" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'otorgantes', 'error')} ">
+<div style="display:none" class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'otorgantes', 'error')} ">
 	<label for="otorgantes">
 		<g:message code="escritura.otorgantes.label" default="Otorgantes" />
 		
@@ -60,7 +60,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'beneficiarios', 'error')} ">
+<div style="display:none" class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'beneficiarios', 'error')} ">
 	<label for="beneficiarios">
 		<g:message code="escritura.beneficiarios.label" default="Beneficiarios" />
 		
@@ -77,40 +77,3 @@
 </ul>
 
 </div>
-
-<%--<div class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'operacionesDelBeneficiario', 'error')} ">
-	<label for="operacionesDelBeneficiario">
-		<g:message code="escritura.operacionesDelBeneficiario.label" default="Operaciones Del Beneficiario" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${escrituraInstance?.operacionesDelBeneficiario?}" var="o">
-    <li><g:link controller="operacionesDelBeneficiario" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="operacionesDelBeneficiario" action="create" params="['escritura.id': escrituraInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'operacionesDelBeneficiario.label', default: 'OperacionesDelBeneficiario')])}</g:link>
-</li>
-</ul>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: escrituraInstance, field: 'operacionesDelOtorgante', 'error')} ">
-	<label for="operacionesDelOtorgante">
-		<g:message code="escritura.operacionesDelOtorgante.label" default="Operaciones Del Otorgante" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${escrituraInstance?.operacionesDelOtorgante?}" var="o">
-    <li><g:link controller="operacionesDelOtorgante" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="operacionesDelOtorgante" action="create" params="['escritura.id': escrituraInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'operacionesDelOtorgante.label', default: 'OperacionesDelOtorgante')])}</g:link>
-</li>
-</ul>
-
-</div>--%>
-
-
-
