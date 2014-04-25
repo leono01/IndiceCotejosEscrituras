@@ -107,4 +107,27 @@ class EscrituraController {
     def guardarCotejos={
         chain(controller:'jasper', action:'index', model: [data:null], params:params)
     }
+    
+    def search() {       
+        println params
+        def escrituraInstanceList
+        def escrituraInstanceTotal        
+        
+        if (params.id && params.id.toString().isNumber()) {            
+            def id = params.id as long
+            escrituraInstanceList = Escritura.findAllByNumeroDeEscritura(id)
+            escrituraInstanceTotal = escrituraInstanceList.size()
+            if (escrituraInstanceList.size()== 0) {
+                flash.message = "Número de expediente no encontrado."
+            }
+        } else {
+            flash.message = "Número de expediente no válido."            
+            params.sort = params.sort ?: "id"
+            params.order = params.order ?: "asc"
+        }
+        render view:"list", model : [
+            escrituraInstanceList: escrituraInstanceList, 
+            escrituraInstanceTotal: escrituraInstanceTotal            
+        ]
+    }
 }

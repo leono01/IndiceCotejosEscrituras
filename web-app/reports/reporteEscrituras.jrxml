@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteEscrituras" language="groovy" pageWidth="612" pageHeight="792" columnWidth="564" leftMargin="28" rightMargin="20" topMargin="20" bottomMargin="14" uuid="07a38453-0782-453a-bf79-d92d05c8586e">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteEscrituras" language="groovy" pageWidth="612" pageHeight="792" columnWidth="564" leftMargin="28" rightMargin="20" topMargin="20" bottomMargin="14" uuid="37c5e95e-fa88-4909-ad03-6dc8bddec5fd">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -12,7 +12,7 @@
 FROM beneficiario b
 RIGHT JOIN escritura e ON e.id = b.escritura_id
 RIGHT JOIN otorgante o ON e.id = o.escritura_id
-WHERE NOT e.nombre_operacion = 'COTEJO' OR e.nombre_operacion = 'RATIFICACIÓN'
+WHERE NOT(e.nombre_operacion = 'RATIFICACIÓN') AND NOT(e.nombre_operacion = 'COTEJO')
 ORDER BY o.nombre_otorgante]]>
 	</queryString>
 	<field name="numero_de_escritura" class="java.lang.String"/>
@@ -22,8 +22,8 @@ ORDER BY o.nombre_otorgante]]>
 	<field name="volumen" class="java.lang.String"/>
 	<field name="folios" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Timestamp"/>
-	<title>
-		<band height="72" splitType="Stretch">
+	<pageHeader>
+		<band height="73" splitType="Stretch">
 			<staticText>
 				<reportElement style="Detail" x="0" y="0" width="266" height="20" uuid="c6436a27-5479-4ada-9c56-0799eccece3d"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -60,9 +60,6 @@ ORDER BY o.nombre_otorgante]]>
 				<text><![CDATA[REPORTE DE ÍNDICE DE ESCRITURAS]]></text>
 			</staticText>
 		</band>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
@@ -97,14 +94,14 @@ ORDER BY o.nombre_otorgante]]>
 					<text><![CDATA[VOLUMEN]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="Column header" x="485" y="0" width="39" height="15" uuid="63891370-b9b8-49ad-a98a-1fd63c037dd5"/>
+					<reportElement style="Column header" x="485" y="0" width="42" height="15" uuid="63891370-b9b8-49ad-a98a-1fd63c037dd5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
 					<text><![CDATA[FOLIOS]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="Column header" x="524" y="0" width="40" height="15" uuid="f9ebb223-7a9f-4860-8905-d871fc1efbb5"/>
+					<reportElement style="Column header" x="527" y="0" width="37" height="15" uuid="f9ebb223-7a9f-4860-8905-d871fc1efbb5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8"/>
 					</textElement>
@@ -125,7 +122,7 @@ ORDER BY o.nombre_otorgante]]>
 			<frame>
 				<reportElement x="0" y="2" width="564" height="15" uuid="22e682ac-9e52-48b5-aed3-565850e9a943"/>
 				<textField isBlankWhenNull="true">
-					<reportElement style="Detail" x="524" y="0" width="40" height="15" uuid="bb4ee5f8-c90d-4214-9b45-d0ddfa9359cb"/>
+					<reportElement style="Detail" x="527" y="0" width="37" height="15" uuid="bb4ee5f8-c90d-4214-9b45-d0ddfa9359cb"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="7"/>
 					</textElement>
@@ -139,7 +136,7 @@ ORDER BY o.nombre_otorgante]]>
 					<textFieldExpression><![CDATA[$F{nombre_beneficiario}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement style="Detail" x="485" y="0" width="39" height="15" uuid="662787f1-5429-4ac8-9e97-1803ed316a72"/>
+					<reportElement style="Detail" x="485" y="0" width="42" height="15" uuid="662787f1-5429-4ac8-9e97-1803ed316a72"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="7"/>
 					</textElement>
@@ -183,23 +180,25 @@ ORDER BY o.nombre_otorgante]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="82" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement x="443" y="60" width="37" height="13" uuid="790c7ee9-1a43-4fd6-9628-b4c7ac94910d"/>
+				<reportElement x="455" y="10" width="37" height="13" uuid="790c7ee9-1a43-4fd6-9628-b4c7ac94910d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Página]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="480" y="60" width="30" height="13" uuid="a256fa70-1b27-4cf2-86d7-46599181af73"/>
+				<reportElement x="492" y="10" width="30" height="13" uuid="a256fa70-1b27-4cf2-86d7-46599181af73"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="509" y="60" width="15" height="13" uuid="bcfbf448-6660-4a99-91af-4f6a01a50f32"/>
+				<reportElement x="521" y="10" width="15" height="13" uuid="bcfbf448-6660-4a99-91af-4f6a01a50f32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[de]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement x="524" y="60" width="28" height="13" uuid="e8571d4d-2a2f-488e-a9c4-6a6dcc94144a"/>
+				<reportElement x="536" y="10" width="28" height="13" uuid="e8571d4d-2a2f-488e-a9c4-6a6dcc94144a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

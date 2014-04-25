@@ -30,6 +30,17 @@
                       </tbody>
                     </table>
                 </div>
+                
+                <div class="well "style="text-align: center">
+                    <g:form controller="escritura" action="search" class="form-search well">
+                      <g:textField class="span2" name="id" placeholder="Escritura o Cotejo..." autocomplete="off"/>
+                      <g:submitButton name="showExpediente" value="Buscar" class="btn btn-primary"/>
+                    </g:form>
+                </div>
+                
+                <div class="well" style="text-align: right">
+                    <g:link name="showAll" action="list">Mostrar todos</g:link>   
+                </div>
 		<div id="list-escritura" class="content scaffold-list" role="main">
 			<h1>Escrituras y cotejos capturados.</h1>
 			<g:if test="${flash.message}">

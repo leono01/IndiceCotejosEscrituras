@@ -16,7 +16,7 @@ environments {
     development {
         dataSource {
             // one of 'create', 'create-drop', 'update', 'validate', ''
-            dbCreate = "create-drop"
+            dbCreate = "update"
             //url = "jdbc:postgresql://192.168.1.114:5432/indice"
             url = "jdbc:postgresql://localhost:5432/indice"
         }
