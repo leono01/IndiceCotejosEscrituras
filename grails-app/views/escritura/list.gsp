@@ -21,10 +21,15 @@
                         <tr>
                           <td>
                             <g:jasperReport name="reporteEscrituras" jasper="reporteEscrituras" format="PDF" description="Hacer Reporte Índice Escrituras (PDF)" action="guardarEscrituras" controller="escritura">
+                                </br><g:textField name="esc1" style="text-align:right"/>-
+                                <g:textField name="esc2" style="text-align:right"/>
                             </g:jasperReport>    
                           </td>
                           <td>
-                            <g:jasperReport name="reporteCotejos" jasper="reporteCotejos" format="PDF" description="Hacer Reporte Índice Cotejos (PDF)" action="guardarCotejos" controller="escritura"/>
+                            <g:jasperReport name="reporteCotejos" jasper="reporteCotejos" format="PDF" description="Hacer Reporte Índice Cotejos (PDF)" action="guardarCotejos" controller="escritura">
+                                </br><g:textField name="esc1" style="text-align:right"/>-
+                                <g:textField name="esc2" style="text-align:right"/>
+                            </g:jasperReport>    
                           </td>
                         </tr>
                       </tbody>

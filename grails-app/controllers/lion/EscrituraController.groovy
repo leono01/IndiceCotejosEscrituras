@@ -100,7 +100,7 @@ class EscrituraController {
         }
     }
     
-    def guardarEscrituras={                
+    def guardarEscrituras={        
         chain(controller:'jasper', action:'index', model: [data:null], params:params)
     }
     
@@ -108,8 +108,7 @@ class EscrituraController {
         chain(controller:'jasper', action:'index', model: [data:null], params:params)
     }
     
-    def search() {       
-        println params
+    def search() {        
         def escrituraInstanceList
         def escrituraInstanceTotal        
         
